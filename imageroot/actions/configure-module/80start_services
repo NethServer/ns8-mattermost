@@ -22,5 +22,5 @@
 
 # If the control reaches this step, the service can be enabled and started
 
-systemctl --user enable --now mattermost.service
+systemctl --user enable mattermost.service
 systemctl --user restart mattermost.service
