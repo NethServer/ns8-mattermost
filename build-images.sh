@@ -3,6 +3,8 @@
 # Terminate on error
 set -e
 
+MATTERMOST_VERSION=7.1
+
 # Prepare variables for later use
 images=()
 # The image will be pushed to GitHub container registry
@@ -30,7 +32,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.authorizations=traefik@any:routeadm" \
     --label="org.nethserver.tcp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
-    --label="org.nethserver.images=docker.io/postgres:13-alpine docker.io/mattermost/mattermost-team-edition:7.0" \
+    --label="org.nethserver.images=docker.io/postgres:13-alpine docker.io/mattermost/mattermost-team-edition:$MATTERMOST_VERSION" \
     "${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
