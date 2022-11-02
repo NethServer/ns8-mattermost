@@ -24,6 +24,7 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/mattermost-app.pid \
     --env MM_SERVICESETTINGS_SITEURL=${MM_SERVICESETTINGS_SITEURL} \
     --env MM_SERVICESETTINGS_LISTENADDRESS=${MM_SERVICESETTINGS_LISTENADDRESS} \
     --env MM_FILESETTINGS_DIRECTORY=${MM_FILESETTINGS_DIRECTORY} \
+    --no-healthcheck \
     ${MATTERMOST_TEAM_EDITION_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/mattermost-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP mattermost-app
