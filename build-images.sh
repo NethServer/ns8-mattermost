@@ -18,7 +18,7 @@ container=$(buildah from scratch)
 # Reuse existing nodebuilder-mattermost container, to speed up builds
 if ! buildah containers --format "{{.ContainerName}}" | grep -q nodebuilder-mattermost; then
     echo "Pulling NodeJS runtime..."
-    buildah from --name nodebuilder-mattermost -v "${PWD}:/usr/src:Z" docker.io/node:18.12.1-alpine
+    buildah from --name nodebuilder-mattermost -v "${PWD}:/usr/src:Z" docker.io/node:18.14.0-alpine
 fi
 
 echo "Build static UI files with node..."
