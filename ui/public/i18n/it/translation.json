@@ -4,7 +4,8 @@
         "save": "Salva"
     },
     "common": {
-        "required": "Obbligatorio"
+        "required": "Obbligatorio",
+        "work_in_progress": "In lavorazione"
     },
     "status": {
         "node": "Nodo",
@@ -18,7 +19,9 @@
         "no_volumes": "Nessun volume",
         "app_images": "Immagine app|Immagini app",
         "app_instance": "Istanza app",
-        "app_volumes": "Volume app|Volumi app"
+        "app_volumes": "Volume app|Volumi app",
+        "installation_node": "Nodo",
+        "mount": "Percorso di mount"
     },
     "error": {
         "error": "Errore",
@@ -33,7 +36,11 @@
         "403": "Operazione non autorizzata"
     },
     "action": {
-        "configure-module": "Configura modulo"
+        "configure-module": "Configura modulo",
+        "get-configuration": "Visualizza configurazione",
+        "get-module-info": "Visualizza info modulo",
+        "get-name": "Visualizza nome",
+        "get-status": "Visualizza stato"
     },
     "task": {
         "cannot_create_task": "Impossibile eseguire task {action}"
