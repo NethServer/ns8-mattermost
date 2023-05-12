@@ -32,7 +32,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.authorizations=traefik@node:routeadm" \
     --label="org.nethserver.tcp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
-    --label="org.nethserver.images=docker.io/postgres:13.10-alpine docker.io/mattermost/mattermost-team-edition:$MATTERMOST_VERSION" \
+    --label="org.nethserver.images=docker.io/postgres:13.11-alpine docker.io/mattermost/mattermost-team-edition:$MATTERMOST_VERSION" \
     "${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
