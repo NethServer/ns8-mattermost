@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+
+#
+# Copyright (C) 2022 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+import os
+import agent
+
+
+# add the new port
+agent.add_public_service(os.environ['MODULE_ID'], [
+    str(os.environ["CALLS_TCP_PORT"]) + "/tcp", # external calls port
+    str(os.environ["CALLS_UDP_PORT"]) + "/udp", # external calls port
+])
+
+# Ignore exit code
