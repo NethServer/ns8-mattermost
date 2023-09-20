@@ -28,6 +28,7 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/mattermost-app.pid \
     --env MM_FILESETTINGS_DIRECTORY=${MM_FILESETTINGS_DIRECTORY} \
     --env MM_LOGSETTINGS_CONSOLEJSON=false \
     --env MM_LOGSETTINGS_ENABLEFILE=false \
+    --env MM_SERVICESETTINGS_ENABLELOCALMODE=true \
     --image-volume=ignore \
     --no-healthcheck \
     ${MATTERMOST_TEAM_EDITION_IMAGE}
