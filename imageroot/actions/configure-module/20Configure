@@ -43,12 +43,6 @@ agent.set_env("MM_SERVICESETTINGS_SITEURL","https://" + host)
 agent.set_env("MM_SERVICESETTINGS_LISTENADDRESS",":8065")
 agent.set_env("MM_FILESETTINGS_DIRECTORY","./data/")
 
-# split port and set in env
-port = os.environ["TCP_PORTS"].split(',')
-agent.set_env("TRAEFIK_TCP_PORT", port[0])
-agent.set_env("CALLS_TCP_PORT", port[1])
-agent.set_env("CALLS_UDP_PORT", os.environ["UDP_PORT"])
-
 # Make sure everything is saved inside the environment file
 # just before starting systemd unit
 agent.dump_env()
