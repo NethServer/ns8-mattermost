@@ -11,7 +11,7 @@ import agent
 
 # split port and set in env
 port = os.environ["TCP_PORTS"].split(',')
-agent.set_env("TRAEFIK_TCP_PORT", port[0])
+# we use TCP_PORT for env var for traefik eg port[0]
 agent.set_env("CALLS_TCP_PORT", port[1])
 agent.set_env("CALLS_UDP_PORT", os.environ["UDP_PORT"])
 
