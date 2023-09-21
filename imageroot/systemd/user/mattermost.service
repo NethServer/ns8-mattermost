@@ -17,9 +17,9 @@ ExecStartPre=/bin/rm -f %t/mattermost.pid %t/mattermost.pod-id
 ExecStartPre=/usr/bin/podman pod create --infra-conmon-pidfile %t/mattermost.pid \
     --pod-id-file %t/mattermost.pod-id \
     --name mattermost \
-    --publish 127.0.0.1:${TCP_PORT}:8065/tcp \
-    --publish 0.0.0.0:${CALLS_UDP_PORT}:${CALLS_UDP_PORT}/udp \
-    --publish 0.0.0.0:${CALLS_TCP_PORT}:${CALLS_TCP_PORT}/tcp \
+    --publish 127.0.0.1:${TCP_PORT}:8065 \
+    --publish ${CALLS_UDP_PORT}:${CALLS_UDP_PORT}/udp \
+    --publish ${CALLS_TCP_PORT}:${CALLS_TCP_PORT}/tcp \
     --replace
 ExecStart=/usr/bin/podman pod start --pod-id-file %t/mattermost.pod-id
 ExecStop=/usr/bin/podman pod stop --ignore --pod-id-file %t/mattermost.pod-id -t 10
