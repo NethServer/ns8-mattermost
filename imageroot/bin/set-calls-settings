@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#
+# Copyright (C) 2023 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+# Set on the fly the calls settings
+
+# we need to wait socket is up
+podman exec -i mattermost-app bash <<"EOF"
+x=0
+while  ! ls /var/tmp/mattermost_local.socket > /dev/null 2>&1
+do
+    ((x=x+1))
+    if [[ $x -gt 60 ]];then
+       echo 'The Linux socket mattermost_local.socket is not available: Timeout'
+       exit 1
+    fi
+    echo "waiting socket /var/tmp/mattermost_local.socket : $x seconds"
+    sleep 1
+done
+
+printf '{"PluginSettings": {"Plugins": {"com.mattermost.calls": {"icehostoverride": "%s","tcpserverport": %d,"udpserverport": %d}}}}\n' "${TRAEFIK_HOST}" ${CALLS_TCP_PORT} ${CALLS_UDP_PORT} | mmctl --local config patch /dev/stdin
+mmctl --local config reload
+EOF

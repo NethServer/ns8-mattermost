@@ -26,12 +26,16 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/mattermost-app.pid \
     --env MM_SERVICESETTINGS_SITEURL=${MM_SERVICESETTINGS_SITEURL} \
     --env MM_SERVICESETTINGS_LISTENADDRESS=${MM_SERVICESETTINGS_LISTENADDRESS} \
     --env MM_FILESETTINGS_DIRECTORY=${MM_FILESETTINGS_DIRECTORY} \
+    --env TRAEFIK_HOST=${TRAEFIK_HOST} \
+    --env CALLS_TCP_PORT=${CALLS_TCP_PORT} \
+    --env CALLS_UDP_PORT=${CALLS_UDP_PORT} \
     --env MM_LOGSETTINGS_CONSOLEJSON=false \
     --env MM_LOGSETTINGS_ENABLEFILE=false \
     --env MM_SERVICESETTINGS_ENABLELOCALMODE=true \
     --image-volume=ignore \
     --no-healthcheck \
     ${MATTERMOST_TEAM_EDITION_IMAGE}
+ExecStartPost=runagent set-calls-settings
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/mattermost-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP mattermost-app
 SyslogIdentifier=%u
