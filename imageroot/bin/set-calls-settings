@@ -10,7 +10,7 @@
 # we need to wait socket is up, we are limited by the timeout of mattermost-app.service
 podman exec -i mattermost-app bash <<"EOF"
 x=0
-while  ! ls /var/tmp/mattermost_local.socket > /dev/null 2>&1
+while ! [ -e /var/tmp/mattermost_local.socket ]
 do
     ((x=x+1))
     echo "waiting socket /var/tmp/mattermost_local.socket : $x seconds"
