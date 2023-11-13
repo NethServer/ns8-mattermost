@@ -3,7 +3,7 @@
 # Terminate on error
 set -e
 
-MATTERMOST_VERSION=8.1.5
+MATTERMOST_VERSION=8.1.6
 
 # Prepare variables for later use
 images=()
