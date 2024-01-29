@@ -1,0 +1,23 @@
+#!/usr/bin/env python3
+
+#
+# Copyright (C) 2023 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+import os
+import agent
+import secrets
+import binascii
+
+# Generate a random hex string of length 32
+def generate_random_hex(length):
+    random_bytes = secrets.token_bytes(length)
+    random_hex = binascii.hexlify(random_bytes).decode('utf-8')
+    return random_hex
+
+# Set the OAUTH_CLIENT_ID and OAUTH_CLIENT_SECRET environment variables
+oath_client_id = generate_random_hex(32)
+oath_client_secret = generate_random_hex(32)
+agent.set_env("OAUTH_CLIENT_ID", oath_client_id)
+agent.set_env("OAUTH_CLIENT_SECRET", oath_client_secret)
