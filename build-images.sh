@@ -33,7 +33,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.tcp-ports-demand=2" \
     --label="org.nethserver.udp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
-    --label="org.nethserver.images=docker.io/postgres:13.13-alpine docker.io/mattermost/mattermost-team-edition:$MATTERMOST_VERSION ghcr.io/nethserver/mattermost-nginx:${IMAGETAG} ghcr.io/nethserver/mattermost-fpm:${IMAGETAG}" \
+    --label="org.nethserver.images=docker.io/postgres:13.13-alpine docker.io/mattermost/mattermost-team-edition:$MATTERMOST_VERSION ghcr.io/nethserver/mattermost-nginx:${IMAGETAG} ghcr.io/nethserver/mattermost-fpm:${IMAGETAG} ghcr.io/mattermost-postgres-oauth:${IMAGETAG}" \
     "${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
@@ -61,6 +61,18 @@ sed "s/php:fpm/${fpm_version}/" Dockerfile | buildah bud -f - -t ${fpm_image}
 #buildah add "${fpm_image}" oauth /var/www/html/oauth
 # Append the image URL to the images array
 images+=("${fpm_image}")
+
+# build postgresql
+reponame="mattermost-postgres-oauth"
+posgresql_image="postgres:15.5-alpine3.18"
+container=$(buildah from docker.io/${posgresql_image})
+buildah add "${container}" init_postgres.sh /docker-entrypoint-initdb.d/init_postgres.sh
+buildah add "${container}" config_init.sh.example /docker-entrypoint-initdb.d/config_init.sh
+# Commit the image
+buildah commit "${container}" "${repobase}/${reponame}"
+
+# Append the image URL to the images array
+images+=("${repobase}/${reponame}")
 #
 # NOTICE:
 #
