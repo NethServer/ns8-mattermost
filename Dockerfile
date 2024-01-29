@@ -13,3 +13,5 @@ RUN set -x \
 RUN ln -s /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
 
 COPY oauth /var/www/html/oauth
+COPY config_db.php /var/www/html/oauth/config_db.php
+COPY config_ldap.php /var/www/html/oauth/LDAP/config_ldap.php
