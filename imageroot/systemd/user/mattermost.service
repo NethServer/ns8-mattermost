@@ -5,8 +5,9 @@
 
 [Unit]
 Description=Podman mattermost.service
-Requires=postgres-app.service mattermost-app.service
-Before=postgres-app.service mattermost-app.service
+Requires=postgres-app.service mattermost-app.service mattermost-nginx.service mattermost-fpm.service postgres-oauth.service 
+Before=postgres-app.service mattermost-app.service mattermost-nginx.service mattermost-fpm.service postgres-oauth.service
+
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
