@@ -29,6 +29,7 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/postgres-oauth.pid \
     --env db_name="oauth_db" \
     --env db_host="127.0.0.1" \
     --env db_port="5433" \
+    --env PGPORT="5433" \
     ${MATTERMOST_POSTGRES_OAUTH_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/postgres-oauth.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP postgres-oauth
