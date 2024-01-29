@@ -46,7 +46,7 @@ reponame="mattermost-nginx"
 nginx_alpine="nginx:1.25.3-alpine3.18"
 container=$(buildah from docker.io/${nginx_alpine})
 buildah add "${container}" oauth /var/www/html/oauth
-buildah add "${container}" oauth.conf /etc/nginx/conf.d/oauth.conf
+buildah add "${container}" oauth.conf /etc/nginx/conf.d/default.conf
 
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
