@@ -1,7 +1,0 @@
-# Deny access to everything by default
-deny from all
-
-# Disallow php files
-<Files *.php>
-    deny from all
-</Files>
