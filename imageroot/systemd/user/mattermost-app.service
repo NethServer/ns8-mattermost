@@ -36,9 +36,12 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/mattermost-app.pid \
     --env MM_GITLABSETTINGS_SECRET=${OAUTH_CLIENT_SECRET} \
     --env MM_GITLABSETTINGS_ID=${OAUTH_CLIENT_ID} \
     --env MM_GITLABSETTINGS_SCOPE="" \
-    --env MM_GITLABSETTINGS_AUTHENDPOINT="http://127.0.0.1/oauth/authorize.php" \
-    --env MM_GITLABSETTINGS_TOKENENDPOINT="http://127.0.0.1/oauth/token.php" \
-    --env MM_GITLABSETTINGS_USERAPIENDPOINT="http://127.0.0.1/oauth/resource.php" \
+    --env MM_GITLABSETTINGS_AUTHENDPOINT="https://${TRAEFIK_HOST}-oauth.rocky9-pve4.org/oauth/authorize.php" \
+    --env MM_GITLABSETTINGS_TOKENENDPOINT="https://${TRAEFIK_HOST}-oauth.rocky9-pve4.org/oauth/token.php" \
+    --env MM_GITLABSETTINGS_USERAPIENDPOINT="https://${TRAEFIK_HOST}-oauth.rocky9-pve4.org/oauth/resource.php" \
+    --env MM_SERVICESETTINGS_ENABLEINSECUREOUTGOINGCONNECTIONS=true \
+    --env MM_EMAILSETTINGS_ENABLESIGNINWITHEMAIL=false \
+    --env MM_EMAILSETTINGS_ENABLESIGNINWITHUSERNAME=true \
     --image-volume=ignore \
     --no-healthcheck \
     ${MATTERMOST_TEAM_EDITION_IMAGE}
