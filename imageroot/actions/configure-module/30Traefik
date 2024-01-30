@@ -57,6 +57,19 @@ response = agent.tasks.run(
         'lets_encrypt': le
     },
 )
+# Configure Traefik to route "oauth.domain.com/oauth" path requests to the oauth service
+response = agent.tasks.run(
+    agent_id=agent.resolve_agent_id('traefik@node'),
+    action='set-route',
+    data={
+        'instance': os.environ['MODULE_ID']+'-oauth',
+        'url':  'http://127.0.0.1:' + os.environ["OAUTH_TCP_PORT"],
+        'host': 'oauth.'+host,
+        "path": "/oauth",
+        'http2https': h2hs,
+        'lets_encrypt': le
+    },
+)
 
 # Check if traefik configuration has been successfull
 agent.assert_exp(response['exit_code'] == 0)
