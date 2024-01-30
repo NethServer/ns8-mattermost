@@ -1,0 +1,39 @@
+[Unit]
+Description=Podman  mattermost-ldap.service
+BindsTo=mattermost.service
+After=postgres-app.service
+
+[Service]
+Environment=PODMAN_SYSTEMD_UNIT=%n
+EnvironmentFile=%S/state/environment
+WorkingDirectory=%S/state
+Restart=always
+TimeoutStopSec=70
+ExecStartPre=/bin/rm -f %t/mattermost-ldap.pid %t/mattermost-ldap.ctr-id
+ExecStart=/usr/bin/podman run --conmon-pidfile %t/mattermost-ldap.pid \
+    --cidfile %t/mattermost-ldap.ctr-id --cgroups=no-conmon \
+    --pod-id-file %t/mattermost.pod-id --replace -d --name  mattermost-ldap \
+    --env ldap_host="ldap://${LDAP_HOST}/" \
+    --env ldap_port=${LDAP_PORT} \
+    --env ldap_version=3 \
+    --env ldap_start_tls=0 \
+    --env ldap_search_attribute="${LDAP_SEARCH:-uid}" \
+    --env ldap_base_dn="${LDAP_BASE_DN}" \
+    --env ldap_filter="(objectClass=*)" \
+    --env ldap_bind_dn="${LDAP_BIND_DN}" \
+    --env ldap_bind_pass="${LDAP_BIND_DN}" \
+    --env db_host="127.0.0.1" \
+    --env db_port="5432" \
+    --env db_type="pgsql" \
+    --env db_name="oauth_db" \
+    --env db_user="oauth" \
+    --env db_pass="Nethesis,1234" \
+    ${MATTERMOST_LDAP_IMAGE}
+ExecStop=/usr/bin/podman stop --ignore --cidfile %t/mattermost-ldap.ctr-id -t 10
+ExecReload=/usr/bin/podman kill -s HUP mattermost-ldap
+ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/mattermost-ldap.ctr-id
+PIDFile=%t/mattermost-ldap.pid
+Type=forking
+
+[Install]
+WantedBy=default.target
