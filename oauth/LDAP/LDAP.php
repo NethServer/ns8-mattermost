@@ -203,10 +203,9 @@ class LDAP implements LDAPInterface
         }
 
         // $mail = ldap_get_values($this->ldap_server, $data, "mail");
-        $mail = ldap_get_values($this->ldap_server, $data, "cn");
-        if (!$mail) {
-            throw new Exception('An error has occured during ldap_get_values execution (mail). Please check parameter of LDAP/getData.');
-        }
+        // if (!$mail) {
+        //     throw new Exception('An error has occured during ldap_get_values execution (mail). Please check parameter of LDAP/getData.');
+        // }
 
         $cn = ldap_get_values($this->ldap_server, $data, "cn");
         if (!$cn) {
