@@ -32,8 +32,9 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/postgres-app.pid \
     --env db_host="127.0.0.1" \
     --env db_port="5432" \
     ${POSTGRES_IMAGE}
-ExecStartPost=runagent postgresql_oauth_creation.sh
-ExecStartPost=/usr/bin/bash -c "while ! podman  exec postgres-app pg_isready ;  do echo "Wait after postgres is alive" >&2 && sleep 5 ; done"
+ExecStartPost=podman cp %S/bin/postgresql_oauth_creation.sh postgres-app:/usr/bin/postgresql_oauth_creation.sh
+ExecStartPost=podman  exec postgres-app /usr/bin/postgresql_oauth_creation.sh
+ExecStartPost=/usr/bin/bash -c "while ! podman  exec postgres-app pg_isready -U oauth -d oauth_db ;  do sleep 5 ; done"
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/postgres-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP postgres-app
 ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/postgres-app.ctr-id
