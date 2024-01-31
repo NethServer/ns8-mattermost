@@ -19,7 +19,7 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/mattermost-ldap.pid \
     --env ldap_port=${LDAP_PORT} \
     --env ldap_version=3 \
     --env ldap_start_tls=0 \
-    --env ldap_search_attribute="${LDAP_SEARCH:-uid}" \
+    --env ldap_search_attribute="${LDAP_SEARCH}" \
     --env ldap_base_dn="${LDAP_BASE}" \
     --env ldap_filter="(objectClass=*)" \
     --env ldap_bind_dn="${LDAP_USER}" \
