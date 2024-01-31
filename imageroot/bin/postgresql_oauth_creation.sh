@@ -5,6 +5,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
+set -e
+
 # Check if the database exists
 if psql -h localhost -U mattuser -d postgres -lqt | cut -d \| -f 1 | grep -qw $db_name; then
     echo "Database '$db_name' already exists."
