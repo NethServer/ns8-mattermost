@@ -45,3 +45,6 @@ agent.set_env("MM_FILESETTINGS_DIRECTORY","./data/")
 
 # Setup configuration from domain user input.
 agent.set_env("LDAP_DOMAIN","")
+# openldap uid attribute
+# samba ad sAMAccountName attribute
+agent.set_env("LDAP_SEARCH","")
