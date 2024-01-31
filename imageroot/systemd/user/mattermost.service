@@ -19,6 +19,7 @@ ExecStartPre=/usr/bin/podman pod create --infra-conmon-pidfile %t/mattermost.pid
     --pod-id-file %t/mattermost.pod-id \
     --name mattermost \
     --publish 127.0.0.1:${TCP_PORT}:8065 \
+    --publish 127.0.0.1:${OAUTH_TCP_PORT}:80 \
     "$POD_EXTRA_ARGS" \
     --replace \
     --network=slirp4netns:allow_host_loopback=true \
