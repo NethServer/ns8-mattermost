@@ -7,6 +7,18 @@
 
 set -e
 
+client_id=${client_id:?}
+client_secret=${client_secret:?}
+redirect_uri=${redirect_uri:?}
+grant_types=${grant_types:?}
+scope=${scope:?}
+user_id=${user_id:?}
+db_name=${db_name:?}
+db_user=${db_user:?}
+db_pass=${db_pass:?}
+db_host=${db_host:?}
+db_port=${db_port:?}
+
 # Check if the database exists
 if psql -h localhost -U mattuser -d postgres -lqt | cut -d \| -f 1 | grep -qw $db_name; then
     echo "Database '$db_name' already exists."
