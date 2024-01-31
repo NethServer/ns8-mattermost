@@ -15,7 +15,7 @@ ExecStartPre=/bin/rm -f %t/mattermost-ldap.pid %t/mattermost-ldap.ctr-id
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/mattermost-ldap.pid \
     --cidfile %t/mattermost-ldap.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/mattermost.pod-id --replace -d --name  mattermost-ldap \
-    --env ldap_host="ldap://accountprovider/" \
+    --env ldap_host="ldap://accountprovider:${LDAP_PORT}/" \
     --env ldap_port=${LDAP_PORT} \
     --env ldap_version=3 \
     --env ldap_start_tls=0 \
