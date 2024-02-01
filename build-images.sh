@@ -61,7 +61,10 @@ apk add --no-cache \
   php83-pdo_pgsql \
   php83-pdo \
   php83-session \
-  php83-xml
+  php83-xml \
+  php83-xmlreader \
+  php83-xmlwriter
+
 (
   # dowload code from github
   wget https://github.com/Crivaledaz/Mattermost-LDAP/archive/refs/tags/v${MATTERMOST_LDAP}.tar.gz -O /tmp/mattermost-ldap.tar.gz
