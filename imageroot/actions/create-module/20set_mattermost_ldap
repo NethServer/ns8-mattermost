@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+
+#
+# Copyright (C) 2022 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+import os
+import agent
+
+
+# experimental mattermost-ldap, the following settings 
+# are used by modifying the environment file
+# Setup configuration from domain user input. (domain.org)
+agent.set_env("LDAP_DOMAIN","")
+
+# Setup configuration of the LDAP attribute ID for login
+# openldap uid attribute
+# samba ad sAMAccountName attribute
+agent.set_env("LDAP_SEARCH","")
+
+# enable the ldap auth (true/false)
+agent.set_env("LDAP_AUTH","false")
+
+# if you want to allow only the ldap login set false the two following variables
+# enable the siging with username (true/false)
+agent.set_env("SIGNINGWITHUSERNAME","true")
+# enable the siging with email (true/false)
+agent.set_env("SIGNINGWITHEMAIL","true")
