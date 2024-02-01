@@ -64,7 +64,7 @@ podman exec -ti postgres-app psql -U mattuser
 An experimental feature is proposed to authenticate via the LDAP of NethServer, 
 
 - the mail field is a mandatory inside the LDAP to authenticate
-- a new DNS A or AAAA is a mandatory, the FQDN of the LDAP oauth is automaticaly created by appending `oaut.` to the FQDN you will choose for mattermost. For example if you set `mattermost.domain.org`, then
+- a new DNS A or AAAA is a mandatory, the FQDN of the LDAP oauth is automaticaly created by appending `oauth.` to the FQDN you will choose for mattermost. For example if you set `mattermost.domain.org`, then
   you need to adjust a new dns entry to oauth.mattermost.domain.org to the IP of your server
 
 after that you have to manually modify the file environment to adjust some variables
