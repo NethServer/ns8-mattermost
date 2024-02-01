@@ -1,11 +1,11 @@
 #!/bin/bash
 
 #
-# Copyright (C) 2023 Nethesis S.r.l.
+# Copyright (C) 2024 Nethesis S.r.l.
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-#set -e
+
 
 # Check if the database exists
 if  podman  exec postgres-app psql -U oauth -d oauth_db > /dev/null 2>&1; then
@@ -14,7 +14,7 @@ else
     tmpfile=$(mktemp)
     trap "rm -f \${tmpfile}" EXIT
     cat <<'EOF' >${tmpfile}
-#######################################--Fonctions--###############################################
+#######################################--Functions--###############################################
 
 ok() { echo -e '\e[32m'$1'\e[m'; }
 error() { echo -e '\e[31m'$1'\e[m'; }

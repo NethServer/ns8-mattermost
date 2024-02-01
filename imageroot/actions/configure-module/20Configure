@@ -42,4 +42,3 @@ host = data.get("host")
 agent.set_env("MM_SERVICESETTINGS_SITEURL","https://" + host)
 agent.set_env("MM_SERVICESETTINGS_LISTENADDRESS",":8065")
 agent.set_env("MM_FILESETTINGS_DIRECTORY","./data/")
-
