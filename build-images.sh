@@ -4,8 +4,8 @@
 set -e
 
 MATTERMOST_VERSION=8.1.8
-alpine_version=3.19.1
-mattermost_ldap_version=2.1
+ALPINE_VERSION=3.19.1
+MATTERMOST_LDAP_VERSION=2.1
 
 # Prepare variables for later use
 images=()
@@ -46,8 +46,8 @@ images+=("${repobase}/${reponame}")
 
 # Create mattermost-ldap image
 reponame="mattermost-ldap"
-container=$(buildah from  docker.io/library/alpine:${alpine_version})
-buildah config --env MATTERMOST_LDAP=${mattermost_ldap_version} "${container}"
+container=$(buildah from  docker.io/library/alpine:${ALPINE_VERSION})
+buildah config --env MATTERMOST_LDAP=${MATTERMOST_LDAP_VERSION} "${container}"
 buildah run "${container}" /bin/sh <<'EOF'
 set -e
 apk add --no-cache \
