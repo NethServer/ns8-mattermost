@@ -59,7 +59,8 @@ apk add --no-cache \
   php83-pgsql \
   php83-ldap \
   php83-pdo_pgsql \
-  php83-pdo
+  php83-pdo \
+  php83-session
 
 (
   # dowload code from github
