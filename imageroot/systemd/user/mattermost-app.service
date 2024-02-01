@@ -32,7 +32,7 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/mattermost-app.pid \
     --env MM_LOGSETTINGS_CONSOLEJSON=false \
     --env MM_LOGSETTINGS_ENABLEFILE=false \
     --env MM_SERVICESETTINGS_ENABLELOCALMODE=true \
-    --env MM_GITLABSETTINGS_ENABLE=true \
+    --env MM_GITLABSETTINGS_ENABLE=${LDAP_AUTH} \
     --env MM_GITLABSETTINGS_SECRET=${OAUTH_CLIENT_SECRET} \
     --env MM_GITLABSETTINGS_ID=${OAUTH_CLIENT_ID} \
     --env MM_GITLABSETTINGS_SCOPE="" \
@@ -40,8 +40,8 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/mattermost-app.pid \
     --env MM_GITLABSETTINGS_TOKENENDPOINT="https://oauth.${TRAEFIK_HOST}/oauth/token.php" \
     --env MM_GITLABSETTINGS_USERAPIENDPOINT="https://oauth.${TRAEFIK_HOST}/oauth/resource.php" \
     --env MM_SERVICESETTINGS_ENABLEINSECUREOUTGOINGCONNECTIONS=true \
-    --env MM_EMAILSETTINGS_ENABLESIGNINWITHEMAIL=false \
-    --env MM_EMAILSETTINGS_ENABLESIGNINWITHUSERNAME=true \
+    --env MM_EMAILSETTINGS_ENABLESIGNINWITHEMAIL=${SIGNINGWITHEMAIL} \
+    --env MM_EMAILSETTINGS_ENABLESIGNINWITHUSERNAME=t${SIGNINGWITHUSERNAME}\
     --image-volume=ignore \
     --no-healthcheck \
     ${MATTERMOST_TEAM_EDITION_IMAGE}
