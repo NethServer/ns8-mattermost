@@ -29,8 +29,8 @@ except:
         'port': 20000,
         'schema': 'rfc2307',
         'location': 'internal',
-        'base_dn': 'dc=sogo,dc=invalid',
-        'bind_dn': 'cn=example,dc=sogo,dc=invalid',
+        'base_dn': 'dc=mattermost,dc=invalid',
+        'bind_dn': 'cn=example,dc=mattermost,dc=invalid',
         'bind_password': 'invalid',
     }
 
