@@ -59,6 +59,23 @@ You can access the database of a running instance using this command:
 ```
 podman exec -ti postgres-app psql -U mattuser
 ```
+## mattermost-ldap
+
+An experimental feature is proposed to authenticate via the LDAP of NethServer, 
+
+- the mail field is a mandatory inside the LDAP to authenticate
+- a new DNS A or AAAA is a mandatory, the FQDN of the LDAP oauth is automaticaly created by appending `oaut.` to the FQDN you will choose for mattermost. For example if you set `mattermost.domain.org`, then
+  you need to adjust a new dns entry to oauth.mattermost.domain.org to the IP of your server
+
+after that you have to manually modify the file environment to adjust some variables
+
+- LDAP_DOMAIN: the userdomain you want to use
+- LDAP_SEARCH: the LDAP attribute ID for login ( openldap: `uid`, AD: `sAMAccountName`)
+- LDAP_AUTH: enable the ldap auth (true/false)
+
+if you want to allow only the ldap login set false the two following variables
+- SIGNINGWITHUSERNAME: enable the siging with username (true/false)
+- SIGNINGWITHEMAIL:  enable the siging with email (true/false)
 
 ## Smarthost discovery
 
