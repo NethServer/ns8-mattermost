@@ -77,6 +77,28 @@ if you want to allow only the ldap login set false the two following variables
 - SIGNINGWITHUSERNAME: enable the siging with username (true/false)
 - SIGNINGWITHEMAIL:  enable the siging with email (true/false)
 
+To create manually the LDAP mail field in sambaAD, first login to the container
+
+create the file.ldif manually
+```
+  dn:CN=Administrator,CN=Users,DC=ad,DC=domain,DC=org
+  changetype: modify
+  add: mail
+  mail: administrator@ad.domain.org
+```
+`/usr/bin/ldbmodify -H /var/lib/samba/private/sam.ldb file.ldif`
+
+To create manually the LDAP mail field in openldap, first login to the container
+
+```
+ldapmodify  <<EOF
+dn: uid=administrator,ou=People,dc=domain,dc=org
+changetype: modify
+add: mail
+mail: administrator@domain.org
+EOF
+```
+
 ## Smarthost discovery
 
 Mattermost registers to the event smarthost-changed, each time you enable or disable the smarthost settings in the node, you restart mattermost.
