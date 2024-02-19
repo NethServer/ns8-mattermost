@@ -99,6 +99,12 @@ mail: administrator@domain.org
 EOF
 ```
 
+The service mattermost must be restarted at the end
+
+```
+systemctl --user restart mattermost.service
+```
+
 ## Smarthost discovery
 
 Mattermost registers to the event smarthost-changed, each time you enable or disable the smarthost settings in the node, you restart mattermost.
