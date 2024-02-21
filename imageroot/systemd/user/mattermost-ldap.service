@@ -10,6 +10,7 @@ EnvironmentFile=-%S/state/discovery_ldap.env
 WorkingDirectory=%S/state
 Restart=always
 TimeoutStopSec=70
+ExecCondition=/bin/sh -c '[ -n "$OAUTH_TCP_PORT" ]'
 ExecStartPre=/usr/local/bin/runagent discover-ldap
 ExecStartPre=/bin/rm -f %t/mattermost-ldap.pid %t/mattermost-ldap.ctr-id
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/mattermost-ldap.pid \

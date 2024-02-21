@@ -5,9 +5,10 @@
 
 [Unit]
 Description=Podman mattermost.service
-Requires=postgres-app.service mattermost-app.service mattermost-ldap.service
+Requires=postgres-app.service mattermost-app.service
 Before=postgres-app.service mattermost-app.service mattermost-ldap.service
-
+# during upgrade this service might not been allowed to start
+Wants=mattermost-ldap.service
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
