@@ -8,7 +8,7 @@ ssh_key="$(cat $SSH_KEYFILE)"
 
 podman run -i \
     -v .:/home/pwuser/ns8-module:z \
-    --name rf-core-runner ghcr.io/marketsquare/robotframework-browser/rfbrowser-stable:v10.1.0 \
+    --name rf-core-runner ghcr.io/marketsquare/robotframework-browser/rfbrowser-stable:v18.2.0 \
     bash -l -s <<EOF
     set -e
     echo "$ssh_key" > /home/pwuser/ns8-key
