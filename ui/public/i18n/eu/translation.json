@@ -1,1 +1,53 @@
-{}
+{
+    "status": {
+        "services": "Service | Services",
+        "app_images": "App image | App images",
+        "no_services": "No services",
+        "app_instance": "App instance",
+        "mount": "Mount",
+        "title": "Status",
+        "installation_node": "Installation node",
+        "no_volumes": "No volumes",
+        "created": "Created",
+        "size": "Size",
+        "name": "Name",
+        "no_images": "No images",
+        "app_volumes": "App volume | App volumes",
+        "node": "Node"
+    },
+    "common": {
+        "work_in_progress": "Work in progress",
+        "required": "Required"
+    },
+    "settings": {
+        "save": "Save",
+        "enabled": "Enabled",
+        "disabled": "Disabled",
+        "title": "Settings"
+    },
+    "error": {
+        "401": "Invalid authentication",
+        "error": "Error",
+        "network_timeout": "Network timeout",
+        "404": "Resource not found",
+        "network_error": "Network error",
+        "validation_error": "Validation error",
+        "403": "Operation not authorized",
+        "cannot_retrieve_installed_modules": "Cannot retrieve installed modules",
+        "cannot_retrieve_module_info": "Cannot retrieve module info",
+        "generic_error": "Something went wrong"
+    },
+    "action": {
+        "get-module-info": "Get module info",
+        "get-status": "Get status",
+        "get-configuration": "Get configuration",
+        "get-name": "Get name",
+        "configure-module": "Configure module"
+    },
+    "task": {
+        "cannot_create_task": "Cannot create task {action}"
+    },
+    "about": {
+        "title": "About"
+    }
+}
