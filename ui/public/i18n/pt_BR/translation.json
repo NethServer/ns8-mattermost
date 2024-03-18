@@ -19,7 +19,12 @@
         "save": "Save",
         "disabled": "Disabled",
         "enabled": "Enabled",
-        "title": "Settings"
+        "title": "Settings",
+        "instance_configuration": "Configure {instance}",
+        "host_format": "Must be a valid fully qualified domain name",
+        "email_format": "Invalid email address",
+        "domain_already_used_in_traefik": "This domain is already used in traefik",
+        "host_pattern": "Must be a valid fully qualified domain name"
     },
     "common": {
         "required": "Required",
