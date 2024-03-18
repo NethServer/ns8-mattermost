@@ -23,7 +23,12 @@
         "disabled": "Disabled",
         "save": "Save",
         "enabled": "Enabled",
-        "title": "Settings"
+        "title": "Settings",
+        "instance_configuration": "Configure {instance}",
+        "email_format": "Invalid email address",
+        "host_format": "Must be a valid fully qualified domain name",
+        "domain_already_used_in_traefik": "This domain is already used in traefik",
+        "host_pattern": "Must be a valid fully qualified domain name"
     },
     "error": {
         "403": "Operation not authorized",
