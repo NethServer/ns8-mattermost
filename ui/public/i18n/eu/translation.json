@@ -23,7 +23,9 @@
         "save": "Save",
         "enabled": "Enabled",
         "disabled": "Disabled",
-        "title": "Settings"
+        "title": "Settings",
+        "host_format": "Must be a valid fully qualified domain name",
+        "host_pattern": "Must be a valid fully qualified domain name"
     },
     "error": {
         "401": "Invalid authentication",
