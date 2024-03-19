@@ -2,14 +2,14 @@
     "settings": {
         "title": "Impostazioni",
         "save": "Salva",
-        "enabled": "Enabled",
+        "enabled": "Abilitato",
         "instance_configuration": "Configura {instance}",
         "lets_encrypt": "Let's Encrypt",
         "http_to_https": "Da HTTP a HTTPS",
         "configuring": "Configurazione...",
         "domain_already_used_in_traefik": "Questo dominio è già utilizzato in traefik",
         "mattermost_fqdn": "FQDN Mattermost",
-        "disabled": "Disabled",
+        "disabled": "Disabilitato",
         "email_format": "Indirizzo e-mail non valido",
         "host_pattern": "Deve essere un nome di dominio pienamente qualificato valido",
         "host_format": "Deve essere un nome di dominio pienamente qualificato valido"
