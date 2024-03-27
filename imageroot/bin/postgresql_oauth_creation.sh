@@ -7,9 +7,41 @@
 
 
 
-# Check if the database exists
+# Check if the database exists and update for $redirect_uri
 if  podman  exec postgres-app psql -U oauth -d oauth_db > /dev/null 2>&1; then
     echo "Database 'oauth_db' already exists."
+    tmpfile=$(mktemp)
+    trap "rm -f \${tmpfile}" EXIT
+    cat <<'EOF' >${tmpfile}
+#######################################--Functions--###############################################
+
+ok() { echo -e '\e[32m'$1'\e[m'; }
+error() { echo -e '\e[31m'$1'\e[m'; }
+info() { echo -e '\e[34m'$1'\e[m'; }
+warn() { echo -e '\e[33m'$1'\e[m'; }
+
+#######################################--SQL STATEMENT--###########################################
+
+#Client update
+update_client="UPDATE oauth_clients SET redirect_uri='$redirect_uri' WHERE client_id='$client_id';"
+
+###################################################################################################
+
+#update new client in the database
+info "Update new client in the database"
+psql -U $db_user -d $db_name -c "$update_client"
+
+#Verification
+psql -U $db_user -d $db_name -c "SELECT * from oauth_clients WHERE client_id='$client_id';" | grep '(1'
+
+if [ $? ]
+then ok "Client has been updated\n"
+else error "Client has not been updated ! Check log below"
+fi
+EOF
+    podman cp ${tmpfile} postgres-app:/usr/bin/postgresql_oauth_modified.sh
+    podman  exec postgres-app bash /usr/bin/postgresql_oauth_modified.sh
+    echo "Setup complete."
 else
     tmpfile=$(mktemp)
     trap "rm -f \${tmpfile}" EXIT
