@@ -5,7 +5,11 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-
+# exit if the secret and the client_id are not set
+if [ -z "$OAUTH_CLIENT_ID" ] || [ -z "$OAUTH_CLIENT_SECRET" ]; then
+    echo "OAUTH_CLIENT_ID and OAUTH_CLIENT_SECRET are required to configure mattermost-ldap."
+    exit 0
+fi
 
 # Check if the database exists and update for $redirect_uri
 if  podman  exec postgres-app psql -U oauth -d oauth_db > /dev/null 2>&1; then
