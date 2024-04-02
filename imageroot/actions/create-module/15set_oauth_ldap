@@ -17,6 +17,10 @@ def generate_random_hex(length):
     return random_hex
 
 # Set the OAUTH_CLIENT_ID and OAUTH_CLIENT_SECRET environment variables
+if os.environ.get("OAUTH_CLIENT_ID") and os.environ.get("OAUTH_CLIENT_SECRET"):
+    # The variables are already set
+    exit(0)
+
 oath_client_id = generate_random_hex(32)
 oath_client_secret = generate_random_hex(32)
 agent.set_env("OAUTH_CLIENT_ID", oath_client_id)
