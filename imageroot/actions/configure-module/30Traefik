@@ -45,7 +45,7 @@ default_traefik_id = agent.resolve_agent_id('traefik@node')
 if default_traefik_id is None:
     sys.exit(2)
 
-# Configure Traefik to route "/mattermost" path requests to the mattermost service
+# Configure Traefik to the mattermost service
 response = agent.tasks.run(
     agent_id=agent.resolve_agent_id('traefik@node'),
     action='set-route',
@@ -61,15 +61,16 @@ response = agent.tasks.run(
 # Check if traefik configuration has been successfull
 agent.assert_exp(response['exit_code'] == 0)
 
-# Configure Traefik to route "oauth.domain.com/oauth" path requests to the oauth service
+# Configure Traefik to the oauth service
 response = agent.tasks.run(
     agent_id=agent.resolve_agent_id('traefik@node'),
     action='set-route',
     data={
         'instance': os.environ['MODULE_ID']+'-oauth',
         'url':  'http://127.0.0.1:' + os.environ["OAUTH_TCP_PORT"],
-        'host': 'oauth.'+host,
-        "path": "/oauth",
+        'host': host,
+        "path": "/mmldap",
+        "strip_prefix": True,
         'http2https': h2hs,
         'lets_encrypt': le
     },
