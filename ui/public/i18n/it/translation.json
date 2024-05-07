@@ -10,7 +10,9 @@
         "domain_already_used_in_traefik": "Questo dominio è già utilizzato in traefik",
         "mattermost_fqdn": "FQDN Mattermost",
         "disabled": "Disabilitato",
-        "email_format": "Indirizzo e-mail non valido"
+        "email_format": "Indirizzo e-mail non valido",
+        "host_pattern": "Deve essere un nome di dominio pienamente qualificato valido",
+        "host_format": "Deve essere un nome di dominio pienamente qualificato valido"
     },
     "common": {
         "required": "Obbligatorio",

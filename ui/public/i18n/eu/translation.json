@@ -1,1 +1,67 @@
-{}
+{
+    "status": {
+        "services": "Service | Services",
+        "app_images": "App image | App images",
+        "no_services": "No services",
+        "app_instance": "App instance",
+        "mount": "Mount",
+        "title": "Status",
+        "installation_node": "Installation node",
+        "no_volumes": "No volumes",
+        "created": "Created",
+        "size": "Size",
+        "name": "Name",
+        "no_images": "No images",
+        "app_volumes": "App volume | App volumes",
+        "node": "Node",
+        "open_mattermost_page": "Go to application",
+        "active_services": "{num} active service | {num} active services",
+        "inactive_services": "{num} inactive service | {num} inactive services",
+        "failed_services": "{num} failed service | {num} failed services",
+        "mattermost_url": "Mattermost URL"
+    },
+    "common": {
+        "work_in_progress": "Work in progress",
+        "required": "Beharrezkoa"
+    },
+    "settings": {
+        "save": "Save",
+        "enabled": "Enabled",
+        "disabled": "Disabled",
+        "title": "Settings",
+        "host_format": "Must be a valid fully qualified domain name",
+        "host_pattern": "Must be a valid fully qualified domain name",
+        "instance_configuration": "Configure {instance}",
+        "lets_encrypt": "Let's Encrypt",
+        "email_format": "Invalid email address",
+        "mattermost_fqdn": "Mattermost FQDN",
+        "domain_already_used_in_traefik": "This domain is already used in traefik",
+        "configuring": "Configuring...",
+        "http_to_https": "HTTP to HTTPS"
+    },
+    "error": {
+        "401": "Invalid authentication",
+        "error": "Error",
+        "network_timeout": "Network timeout",
+        "404": "Resource not found",
+        "network_error": "Network error",
+        "validation_error": "Validation error",
+        "403": "Operation not authorized",
+        "cannot_retrieve_installed_modules": "Cannot retrieve installed modules",
+        "cannot_retrieve_module_info": "Cannot retrieve module info",
+        "generic_error": "Something went wrong"
+    },
+    "action": {
+        "get-module-info": "Get module info",
+        "get-status": "Get status",
+        "get-configuration": "Get configuration",
+        "get-name": "Get name",
+        "configure-module": "Configure module"
+    },
+    "task": {
+        "cannot_create_task": "Cannot create task {action}"
+    },
+    "about": {
+        "title": "Honi buruz"
+    }
+}
