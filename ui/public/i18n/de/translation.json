@@ -4,7 +4,7 @@
     },
     "common": {
         "required": "Erforderlich",
-        "work_in_progress": "in Arbeit"
+        "work_in_progress": "In Bearbeitung"
     },
     "settings": {
         "title": "Einstellungen",
@@ -24,14 +24,14 @@
     "status": {
         "title": "Status",
         "app_volumes": "App Volumen | App Volumen",
-        "installation_node": "Installations-Knoten",
+        "installation_node": "Knoten der Installation",
         "node": "Knoten",
         "name": "Name",
         "size": "Größe",
         "created": "Erstellt",
-        "mount": "Einhängepunkt",
+        "mount": "Mount",
         "no_services": "Keine Dienste",
-        "app_instance": "App-Instanz",
+        "app_instance": "App Instanz",
         "services": "Dienst | Dienste",
         "app_images": "App Abbild | App Abbilder",
         "no_volumes": "Keine Volumen",
@@ -44,19 +44,19 @@
     },
     "error": {
         "error": "Fehler",
-        "401": "Ungültige Authentifizierung",
+        "401": "Authentifizierung fehlerhaft",
         "network_timeout": "Netzwerk-Zeitüberschreitung",
         "network_error": "Netzwerk-Fehler",
-        "403": "Operation nicht genehmigt",
+        "403": "Vorgang nicht autorisiert",
         "404": "Ressource nicht gefunden",
         "generic_error": "Etwas ist schief gegangen",
-        "validation_error": "Überprüfungsfehler",
-        "cannot_retrieve_module_info": "Modul-Info kann nicht abgerufen werden",
-        "cannot_retrieve_installed_modules": "Installierte Module können nicht abgerufen werden"
+        "validation_error": "Fehler bei der Validierung",
+        "cannot_retrieve_module_info": "Fehler beim Abruf der Modul-Info",
+        "cannot_retrieve_installed_modules": "Fehler beim Abruf installierter Module"
     },
     "action": {
         "get-module-info": "Modul-Info abrufen",
-        "get-name": "Namen abrufen",
+        "get-name": "Name abrufen",
         "get-status": "Status abrufen",
         "get-configuration": "Konfiguration abrufen",
         "configure-module": "Modul konfigurieren"

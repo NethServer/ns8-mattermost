@@ -59,7 +59,7 @@
         "get-status": "Visualizza stato"
     },
     "task": {
-        "cannot_create_task": "Impossibile eseguire task {action}"
+        "cannot_create_task": "Impossibile eseguire il task {action}"
     },
     "about": {
         "title": "Informazioni"
