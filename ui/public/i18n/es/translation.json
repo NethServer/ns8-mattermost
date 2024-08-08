@@ -2,27 +2,27 @@
     "error": {
         "403": "Operación no autorizada",
         "cannot_retrieve_installed_modules": "No se pueden recuperar los módulos instalados",
-        "401": "Autentificación no válida",
+        "401": "Autentificación inválida",
         "cannot_retrieve_module_info": "No se puede recuperar la información del módulo",
-        "generic_error": "Algo salió mal",
+        "generic_error": "Algo ha salido mal",
         "error": "Error",
-        "network_timeout": "Tiempo de espera de red agotado",
+        "network_timeout": "Tiempo de espera de la red agotado",
         "404": "Recurso no encontrado",
-        "network_error": "Fallo de red",
-        "validation_error": "Fallo en la validación"
+        "network_error": "Error en la red",
+        "validation_error": "Error en la validación"
     },
     "common": {
         "required": "Obligatorio",
-        "work_in_progress": "Trabajo en curso"
+        "work_in_progress": "Trabajando"
     },
     "status": {
         "created": "Creado",
         "size": "Tamaño",
         "name": "Nombre",
         "no_images": "Sin imágenes",
-        "app_volumes": "Volumen de aplicación | Volúmenes de aplicación",
+        "app_volumes": "Volumen de la aplicación| Volumen de las aplicaciones",
         "services": "Servicio | Servicios",
-        "app_images": "Imagen de la aplicación | Imágenes de la aplicación",
+        "app_images": "Imagen de la aplicación| Imágenes de las aplicaciones",
         "failed_services": "{num} servicio fallido | {num} servicios fallidos",
         "mattermost_url": "URL Mattermost",
         "open_mattermost_page": "Ir a la aplicación",
@@ -32,20 +32,20 @@
         "app_instance": "Instancia de la aplicación",
         "mount": "Montar",
         "title": "Estado",
-        "installation_node": "Nodo de instalación",
+        "installation_node": "Nodo de la instalación",
         "node": "Nodo",
-        "no_volumes": "Sin volúmenes"
+        "no_volumes": "Sin volumenes"
     },
     "settings": {
         "configuring": "Configurando...",
-        "disabled": "Deshabilitado",
+        "disabled": "Desactivado",
         "instance_configuration": "Configurar {instance}",
         "http_to_https": "HTTP a HTTPS",
         "lets_encrypt": "Let's Encrypt",
         "email_format": "Dirección de correo no válida",
         "mattermost_fqdn": "FQDN Mattermost",
         "save": "Guardar",
-        "enabled": "Habilitado",
+        "enabled": "Activado",
         "domain_already_used_in_traefik": "Este dominio ya está utilizado en traefik",
         "title": "Ajustes",
         "host_pattern": "Debe ser un nombre de dominio válido y completo",
@@ -58,7 +58,7 @@
         "get-module-info": "Obtener información del módulo",
         "get-status": "Obtener el estado",
         "configure-module": "Configurar el módulo",
-        "get-configuration": "Obtener la configuración",
+        "get-configuration": "Obtener los ajustes",
         "get-name": "Obtener el nombre"
     },
     "task": {
