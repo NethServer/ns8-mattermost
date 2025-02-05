@@ -20,4 +20,10 @@
 # along with NethServer.  If not, see COPYING.
 #
 
-systemctl --user try-restart mattermost.service
+# test if the module is upgrading from postgres 13
+if [[ "$PREV_POSTGRES_IMAGE" =~ 13\.[0-9]+ ]]; then
+    systemctl --user restart mattermost.service
+else
+    # the module is not upgrading from postgres 13 and might be not configured
+    systemctl --user try-restart mattermost.service
+fi
