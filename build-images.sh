@@ -3,7 +3,7 @@
 # Terminate on error
 set -e
 
-MATTERMOST_VERSION=9.11.6
+MATTERMOST_VERSION=10.4.1
 
 # Prepare variables for later use
 images=()
@@ -33,7 +33,8 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.tcp-ports-demand=2" \
     --label="org.nethserver.udp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
-    --label="org.nethserver.images=docker.io/postgres:13.13-alpine docker.io/mattermost/mattermost-team-edition:$MATTERMOST_VERSION" \
+    --label="org.nethserver.min-from=2.1.1" \
+    --label="org.nethserver.images=docker.io/postgres:17.2-alpine docker.io/mattermost/mattermost-team-edition:$MATTERMOST_VERSION" \
     "${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
