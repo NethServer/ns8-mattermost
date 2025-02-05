@@ -1,0 +1,23 @@
+#!/bin/bash
+
+#
+# Copyright (C) 2025 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+# upgrade from postgres 13 to 17
+# migration after https://github.com/NethServer/ns8-mattermost/releases/tag/2.1.1
+
+set -e
+
+if podman exec postgres-app psql --version | grep -qE " 13\.[0-9]+"; then
+    echo "Dumping mattermost postgres database"
+    podman exec postgres-app pg_dump -U mattuser --format=c  mattermost > mattermost.pg_dump
+    echo "Stopping mattermost"
+    systemctl stop --user mattermost
+    echo "Remove the v13 postgres volume"
+    podman volume rm -f postgres-data
+    echo "Restoring mattermost postgres database"
+    ../actions/restore-module/40restore-postgres
+else
+    echo "Postgres version is not 13, we do not need to upgrade"
+fi
