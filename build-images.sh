@@ -3,8 +3,6 @@
 # Terminate on error
 set -e
 
-MATTERMOST_VERSION=10.4.1
-
 # Prepare variables for later use
 images=()
 # The image will be pushed to GitHub container registry
@@ -18,7 +16,7 @@ container=$(buildah from scratch)
 # Reuse existing nodebuilder-mattermost container, to speed up builds
 if ! buildah containers --format "{{.ContainerName}}" | grep -q nodebuilder-mattermost; then
     echo "Pulling NodeJS runtime..."
-    buildah from --name nodebuilder-mattermost -v "${PWD}:/usr/src:Z" docker.io/node:18.20.5-alpine
+    buildah from --name nodebuilder-mattermost -v "${PWD}:/usr/src:Z" docker.io/node:18.20.7-alpine
 fi
 
 echo "Build static UI files with node..."
@@ -34,7 +32,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.udp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
     --label="org.nethserver.min-from=2.1.1" \
-    --label="org.nethserver.images=docker.io/postgres:17.2-alpine docker.io/mattermost/mattermost-team-edition:$MATTERMOST_VERSION" \
+    --label="org.nethserver.images=docker.io/postgres:13.13-alpine docker.io/mattermost/mattermost-team-edition:10.5.1" \
     "${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
