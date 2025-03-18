@@ -5,6 +5,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
+set -e
+
 # redirect the standard output  to the standard error
 exec 1>&2
 
@@ -17,7 +19,7 @@ if ! systemctl is-active -q --user postgres-app.service; then
     exit 0
 fi
 
-echo "Postgres service is active, we start database upgrade to 9.11.0"
+echo "Postgres: database upgrade to 9.11.0"
 
 podman exec -i postgres-app bash -c '
 PGPASSWORD="Nethesis,1234" psql -U mattuser -d mattermost -c "
@@ -28,3 +30,17 @@ CREATE TABLE IF NOT EXISTS retentionidsfordeletion (
 );
 CREATE INDEX IF NOT EXISTS idx_retentionidsfordeletion_tablename ON retentionidsfordeletion (tablename);
 "'
+
+# upgrade postgres from 13 to 17, version 13 is still running
+# dump the mattermost database and load it into the new postgres container
+if [[ "${PREV_POSTGRES_IMAGE}" =~ 13\.[0-9]+ ]]; then
+    echo "Postgres: database upgrade from 13 to 17"
+    # Postgres 13 is still running
+    module-dump-state
+    echo "Stopping mattermost"
+    systemctl stop --user mattermost
+    echo "Remove the v13 postgres volume"
+    podman volume rm -f postgres-data
+    echo "Restoring mattermost postgres database"
+    ../actions/restore-module/40restore-postgres
+fi
