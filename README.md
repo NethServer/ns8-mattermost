@@ -32,7 +32,7 @@ Launch `configure-module`, by setting the following parameters:
 Example:
 
 ```
-api-cli run configure-module --agent module/mattermost1 --data - <<EOF
+api-cli run module/mattermost1/configure-module --data - <<EOF
 {
   "host": "mattermost.domain.com",
   "http2https": true,
