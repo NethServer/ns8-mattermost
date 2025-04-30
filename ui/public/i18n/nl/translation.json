@@ -1,0 +1,67 @@
+{
+    "settings": {
+        "configuring": "Configureren...",
+        "instance_configuration": "Configureer {instance}",
+        "disabled": "Uitgeschakeld",
+        "http_to_https": "HTTP naar HTTPS",
+        "lets_encrypt": "Let's Encrypt",
+        "host_format": "Moet een geldige, volledig gekwalificeerde domeinnaam zijn",
+        "email_format": "Ongeldig e-mailadres",
+        "mattermost_fqdn": "Mattermost FQDN",
+        "save": "Opslaan",
+        "enabled": "Ingeschakeld",
+        "domain_already_used_in_traefik": "Dit domein wordt al gebruikt in traefik",
+        "host_pattern": "Moet een geldige, volledig gekwalificeerde domeinnaam zijn",
+        "title": "Instellingen"
+    },
+    "about": {
+        "title": "Over"
+    },
+    "error": {
+        "error": "Fout",
+        "403": "Opdracht niet toegestaan",
+        "cannot_retrieve_installed_modules": "Kan geïnstalleerde modules niet ophalen",
+        "401": "Ongeldige authenticatie",
+        "cannot_retrieve_module_info": "Module-info kan niet worden opgehaald",
+        "generic_error": "Er ging iets mis",
+        "network_timeout": "Netwerktime-out",
+        "404": "Bron niet gevonden",
+        "network_error": "Netwerkfout",
+        "validation_error": "Validatiefout"
+    },
+    "common": {
+        "required": "Vereist",
+        "work_in_progress": "Werk in uitvoering"
+    },
+    "status": {
+        "created": "Gemaakt",
+        "size": "Grootte",
+        "name": "Naam",
+        "no_images": "Geen images",
+        "app_volumes": "App volume | App volumen",
+        "services": "Dienst | Diensten",
+        "app_images": "App kopie | App kopieën",
+        "failed_services": "{num} mislukte service | {num} mislukte services",
+        "mattermost_url": "Mattermost URL",
+        "open_mattermost_page": "Ga naar de applicatie",
+        "active_services": "{num} actieve dienst | {num} actieve diensten",
+        "no_services": "Geen services",
+        "inactive_services": "{num} inactieve dienst| {num} inactieve diensten",
+        "app_instance": "App-instantie",
+        "mount": "Koppelen",
+        "title": "Status",
+        "installation_node": "Installatie node",
+        "node": "Node",
+        "no_volumes": "Geen volumes"
+    },
+    "action": {
+        "get-module-info": "Module-info ophalen",
+        "get-status": "Status ophalen",
+        "configure-module": "Module configureren",
+        "get-configuration": "Configuratie ophalen",
+        "get-name": "Naam ophalen"
+    },
+    "task": {
+        "cannot_create_task": "Kan taak {actie} niet aanmaken"
+    }
+}
