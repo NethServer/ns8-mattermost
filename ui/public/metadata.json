@@ -12,7 +12,7 @@
     }
   ],
   "docs": {
-    "documentation_url": "https://docs.mattermost.com/",
+    "documentation_url": "https://docs.nethserver.org/projects/ns8/en/latest/mattermost.html",
     "bug_url": "https://github.com/NethServer/dev",
     "code_url": "https://github.com/NethServer/ns8-mattermost"
   },
