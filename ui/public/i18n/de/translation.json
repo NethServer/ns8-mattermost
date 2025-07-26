@@ -35,7 +35,7 @@
         "services": "Dienst | Dienste",
         "app_images": "App Abbild | App Abbilder",
         "no_volumes": "Keine Volumen",
-        "no_images": "Keine Abbilder",
+        "no_images": "keine Abbilder",
         "failed_services": "{num} Dienst fehlerhaft | {num} Dienste fehlerhaft",
         "active_services": "{num} aktiver Dienst | {num} aktive Dienste",
         "inactive_services": "{num} inaktiver Dienst | {num} inaktive Dienste",
