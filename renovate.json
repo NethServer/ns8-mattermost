@@ -2,5 +2,20 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "local>NethServer/.github:ns8"
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": ["mattermost"],
+      "versioning": "semver",
+      "allowedVersions": "^10.5.0",
+      "groupName": "Mattermost ESR 10.5.x updates",
+      "automerge": false
+    },
+    {
+      "matchPackageNames": ["mattermost"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "Mattermost new major version notifications",
+      "automerge": false
+    }
   ]
 }
