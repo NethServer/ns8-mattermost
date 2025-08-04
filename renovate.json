@@ -5,16 +5,15 @@
   ],
   "packageRules": [
     {
-      "matchPackageNames": ["mattermost"],
-      "versioning": "semver",
-      "allowedVersions": "^10.5.0",
-      "groupName": "Mattermost ESR 10.5.x updates",
-      "automerge": false
+      "matchPackageNames": ["mattermost/mattermost-team-edition"],
+      "allowedVersions": "10.5.*",
+      "groupName": "ESR 10.5.x updates",
+      "automerge": true
     },
     {
-      "matchPackageNames": ["mattermost"],
-      "matchUpdateTypes": ["major"],
-      "groupName": "Mattermost new major version notifications",
+      "matchPackageNames": ["mattermost/mattermost-team-edition"],
+      "matchUpdateTypes": ["major", "minor"],
+      "groupName": "Non-ESR update",
       "automerge": false
     }
   ]
