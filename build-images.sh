@@ -28,7 +28,7 @@ buildah add "${container}" ui/dist /ui
 # Setup the entrypoint, ask to reserve one TCP port with the label and set a rootless container
 buildah config --entrypoint=/ \
     --label="org.nethserver.authorizations=node:fwadm traefik@node:routeadm" \
-    --label="org.nethserver.min-from=2.1.1" \
+    --label="org.nethserver.min-from=2.2.0" \
     --label="org.nethserver.tcp-ports-demand=2" \
     --label="org.nethserver.udp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
