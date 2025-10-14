@@ -1,1 +1,26 @@
-# Placeholder, see bug NethServer/dev#7058
+#!/usr/bin/env python3
+
+#
+# Copyright (C) 2022 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+import json
+import sys
+# agent is a NethServer library which provides function to communicate with the agent
+import agent
+
+# Try to parse the stdin as JSON.
+# If parsing fails, output everything to stderr
+data = json.load(sys.stdin)
+
+# Setup default values
+host = data.get("host")
+h2hs = data.get("http2https", True)
+
+# Setup configuration from user input.
+agent.set_env("MM_SERVICESETTINGS_SITEURL","https://" + host)
+agent.set_env("MM_SERVICESETTINGS_LISTENADDRESS",":8065")
+agent.set_env("MM_FILESETTINGS_DIRECTORY","./data/")
+agent.set_env("TRAEFIK_HOST", host)
+agent.set_env("TRAEFIK_HTTP2HTTPS", h2hs)
