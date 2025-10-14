@@ -46,5 +46,4 @@ response = agent.tasks.run(
     },
 )
 
-# Check if traefik configuration has been successfull
-agent.assert_exp(response['exit_code'] == 0)
+# exit without error

@@ -27,13 +27,9 @@ import agent
 # Prepare return variable
 config = {}
 
-# Read current configuration from Redis
-env = f'module/{os.environ["MODULE_ID"]}/environment'
-rdb = agent.redis_connect()
-
-config["host"] =  rdb.hget(env, "TRAEFIK_HOST");
-config["http2https"] =  rdb.hget(env, "TRAEFIK_HTTP2HTTPS") == "True";
-config["lets_encrypt"] =  rdb.hget(env, "TRAEFIK_LETS_ENCRYPT") == "True";
+config["host"] =  os.environ.get("TRAEFIK_HOST", "");
+config["http2https"] =  os.environ.get("TRAEFIK_HTTP2HTTPS") == "True";
+config["lets_encrypt"] =  agent.get_route(os.environ['MODULE_ID']).get('lets_encrypt', False);
 
 # Dump the configuratio to stdout
 json.dump(config, fp=sys.stdout)
