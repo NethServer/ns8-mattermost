@@ -17,7 +17,6 @@ data = json.load(sys.stdin)
 # Setup default values
 host = data.get("host")
 h2hs = data.get("http2https", True)
-le = data.get("lets_encrypt", False)
 
 ## Configure set-route
 set_route_data = {
@@ -28,7 +27,7 @@ set_route_data = {
     'lets_encrypt_check': True,
     'lets_encrypt_cleanup': True,
 }
-if le:
-    set_route_data['lets_encrypt'] = le
+if 'lets_encrypt' in data:
+    set_route_data['lets_encrypt'] = data['lets_encrypt']
 
 agent.set_route(set_route_data)
