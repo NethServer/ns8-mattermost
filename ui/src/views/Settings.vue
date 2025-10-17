@@ -53,7 +53,7 @@
                 $t("settings.enabled")
               }}</template>
             </NsToggle>
-            <cv-row v-if="letsEncryptIsEnabled && !isLetsEncryptEnabled">
+            <cv-row v-if="isLetsEncryptCurrentlyEnabled && !isLetsEncryptEnabled">
               <cv-column>
                 <NsInlineNotification
                   kind="warning"
@@ -158,7 +158,7 @@ export default {
       urlCheckInterval: null,
       host: "",
       isLetsEncryptEnabled: false,
-      letsEncryptIsEnabled: false,
+      isLetsEncryptCurrentlyEnabled: false,
       isHttpToHttpsEnabled: false,
       loading: {
         getConfiguration: false,
@@ -294,7 +294,7 @@ export default {
       const config = taskResult.output;
       this.host = config.host;
       this.isLetsEncryptEnabled = config.lets_encrypt;
-      this.letsEncryptIsEnabled = config.lets_encrypt;
+      this.isLetsEncryptCurrentlyEnabled = config.lets_encrypt;
       this.isHttpToHttpsEnabled = config.http2https;
       this.loading.getConfiguration = false;
       this.focusElement("host");
