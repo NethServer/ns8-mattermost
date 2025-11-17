@@ -15,6 +15,12 @@
       "matchUpdateTypes": ["major", "minor"],
       "groupName": "Non-ESR update",
       "automerge": false
-    }
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["postgres"],
+      "allowedVersions": "<= 17",
+      "automerge": true
+    },
   ]
 }
