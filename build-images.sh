@@ -16,7 +16,7 @@ container=$(buildah from scratch)
 # Reuse existing nodebuilder-mattermost container, to speed up builds
 if ! buildah containers --format "{{.ContainerName}}" | grep -q nodebuilder-mattermost; then
     echo "Pulling NodeJS runtime..."
-    buildah from --name nodebuilder-mattermost -v "${PWD}:/usr/src:Z" docker.io/node:18.20.8-alpine
+    buildah from --name nodebuilder-mattermost -v "${PWD}:/usr/src:Z" docker.io/node:24.11.1-alpine
 fi
 
 echo "Build static UI files with node..."
@@ -32,6 +32,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.tcp-ports-demand=2" \
     --label="org.nethserver.udp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
+    --label="org.nethserver.min-core=3.12.4-0" \
     --label="org.nethserver.images=docker.io/postgres:17.7-alpine docker.io/mattermost/mattermost-team-edition:10.5.14" \
     "${container}"
 # Commit the image
