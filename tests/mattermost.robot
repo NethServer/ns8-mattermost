@@ -34,6 +34,10 @@ Retrieve mattermost backend URL
 Check if mattermost works as expected
     Retry test    Backend URL is reachable
 
+Verify mattermost frontend title
+    ${output} =    Execute Command    curl -s ${backend_url}
+    Should Contain    ${output}    <title>Mattermost</title>
+
 Check if mattermost is removed correctly
     ${rc} =    Execute Command    remove-module --no-preserve ${module_id}
     ...    return_rc=True  return_stdout=False
