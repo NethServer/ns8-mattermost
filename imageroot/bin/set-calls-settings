@@ -4,24 +4,18 @@
 # Copyright (C) 2023 Nethesis S.r.l.
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
+set -e
+
+# Generate the patch JSON
+PATCH_FILE=$(mktemp /tmp/calls_patch.XXXXXX.json)
+trap 'rm -rf "${PATCH_FILE}"' EXIT
 
 if [ -z ${CALLS_TCP_PORT} ] || [ -z ${CALLS_UDP_PORT} ]; then
-    print "Port numbers for Calls plugin are not set. Calls might not work!" 1>&2
+    print "Port numbers for Calls plugin are not set. Calls might not work!"
     exit 0
 fi
 
-# Set on the fly the calls settings
-
-# we need to wait socket is up, we are limited by the timeout of mattermost-app.service
-podman exec -i mattermost-app bash <<"EOF"
-x=0
-while ! [ -e /var/tmp/mattermost_local.socket ]
-do
-    ((x=x+1))
-    echo "waiting socket /var/tmp/mattermost_local.socket : $x seconds"
-    sleep 1
-done
-
+# Set on the fly the calls settings (shell are not more available in the container)
 printf '{
     "PluginSettings": {
         "Plugins": {
@@ -33,6 +27,25 @@ printf '{
             }
         }
     }
-}\n' "${TRAEFIK_HOST}" ${CALLS_TCP_PORT} ${CALLS_UDP_PORT} | mmctl --local config patch /dev/stdin
-mmctl --local config reload
-EOF
+}\n' "${TRAEFIK_HOST}" "${CALLS_TCP_PORT}" "${CALLS_UDP_PORT}" > "$PATCH_FILE"
+
+{
+    # Wait loop: mmctl status OK = Mattermost is ready
+    x=0
+    until podman exec mattermost-app /mattermost/bin/mmctl --local system status &>/dev/null; do
+        ((x=x+1))
+        if [ $x -ge 50 ]; then
+            echo "Timeout waiting for mmctl system status after 50 seconds"
+            break
+        fi
+        echo "waiting mmctl system status : $x seconds"
+        sleep 1
+    done
+
+    echo "mmctl system is OK, patching config…"
+
+    podman exec -i mattermost-app /mattermost/bin/mmctl --local config patch /dev/stdin < "$PATCH_FILE"
+    podman exec mattermost-app /mattermost/bin/mmctl --local config reload
+
+    echo "mattermost Patch/config reload sent."
+} 1>&2
