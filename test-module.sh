@@ -1,31 +1,44 @@
 #!/bin/bash
 
-LEADER_NODE=$1
-IMAGE_URL=$2
+#
+# Copyright (C) 2025 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+set -e -a
+
 SSH_KEYFILE=${SSH_KEYFILE:-$HOME/.ssh/id_rsa}
 
-ssh_key="$(cat $SSH_KEYFILE)"
+LEADER_NODE="${1:?missing LEADER_NODE argument}"
+IMAGE_URL="${2:?missing IMAGE_URL argument}"
+shift 2
+
+ssh_key="$(< $SSH_KEYFILE)"
+venvroot=/usr/local/venv
 
 podman run -i \
-    -v .:/home/pwuser/ns8-module:z \
-    --name rf-core-runner ghcr.io/marketsquare/robotframework-browser/rfbrowser-stable:19.1.2 \
-    bash -l -s <<EOF
-    set -e
-    echo "$ssh_key" > /home/pwuser/ns8-key
-    set -x
-    pip install -r /home/pwuser/ns8-module/tests/pythonreq.txt
-    mkdir ~/outputs
-    cd /home/pwuser/ns8-module
-    robot -v NODE_ADDR:${LEADER_NODE} \
-        -v IMAGE_URL:${IMAGE_URL} \
-        -v SSH_KEYFILE:/home/pwuser/ns8-key \
-	-d ~/outputs /home/pwuser/ns8-module/tests/
+    --volume=.:/srv/source:z \
+    --volume=rftest-cache:${venvroot}:z \
+    --replace --name=rftest \
+    --env=ssh_key \
+    --env=venvroot \
+    --env=LEADER_NODE \
+    --env=IMAGE_URL \
+    docker.io/python:3.11-alpine \
+    ash -l -s -- "${@}" <<'EOF'
+set -e
+echo "$ssh_key" > /tmp/idssh
+if [ ! -x ${venvroot}/bin/robot ] ; then
+    python3 -mvenv ${venvroot} --upgrade
+    ${venvroot}/bin/pip3 install -q -r /srv/source/tests/pythonreq.txt
+fi
+cd /srv/source
+mkdir -vp tests/outputs/
+exec ${venvroot}/bin/robot \
+    -v NODE_ADDR:${LEADER_NODE} \
+    -v IMAGE_URL:${IMAGE_URL} \
+    -v SSH_KEYFILE:/tmp/idssh \
+    --name mattermost \
+    --skiponfailure unstable \
+    -d tests/outputs "${@}" tests/
 EOF
-
-tests_res=$?
-
-podman cp rf-core-runner:/home/pwuser/outputs tests/
-podman stop rf-core-runner
-podman rm rf-core-runner
-
-exit ${tests_res}
