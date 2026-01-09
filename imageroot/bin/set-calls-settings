@@ -4,24 +4,14 @@
 # Copyright (C) 2023 Nethesis S.r.l.
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
+set -e
 
 if [ -z ${CALLS_TCP_PORT} ] || [ -z ${CALLS_UDP_PORT} ]; then
-    print "Port numbers for Calls plugin are not set. Calls might not work!" 1>&2
+    printf "Port numbers for Calls plugin are not set. Calls might not work!\n" 1>&2
     exit 0
 fi
 
 # Set on the fly the calls settings
-
-# we need to wait socket is up, we are limited by the timeout of mattermost-app.service
-podman exec -i mattermost-app bash <<"EOF"
-x=0
-while ! [ -e /var/tmp/mattermost_local.socket ]
-do
-    ((x=x+1))
-    echo "waiting socket /var/tmp/mattermost_local.socket : $x seconds"
-    sleep 1
-done
-
 printf '{
     "PluginSettings": {
         "Plugins": {
@@ -33,6 +23,5 @@ printf '{
             }
         }
     }
-}\n' "${TRAEFIK_HOST}" ${CALLS_TCP_PORT} ${CALLS_UDP_PORT} | mmctl --local config patch /dev/stdin
-mmctl --local config reload
-EOF
+}\n' "${TRAEFIK_HOST}" ${CALLS_TCP_PORT} ${CALLS_UDP_PORT} | podman exec -i mattermost-app mmctl --local config patch /dev/stdin
+podman exec -i mattermost-app mmctl --local config reload
