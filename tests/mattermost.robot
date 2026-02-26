@@ -16,6 +16,10 @@ Backend URL is reachable
     ...    return_rc=True  return_stdout=False
     Should Be Equal As Integers    ${rc}  0
 
+Container is healthy
+    ${rc} =    Execute Command    runagent -m ${module_id} podman ps --format={{.Status}} --filter=name=mattermost-app | grep -F '(healthy)'
+    ...    return_rc=True  return_stdout=False
+    Should Be Equal As Integers    ${rc}  0
 
 *** Test Cases ***
 Add module for ${SCENARIO} scenario
@@ -48,6 +52,9 @@ Update module
 
 Check if mattermost works as expected
     Retry test    Backend URL is reachable
+
+Check if mattermost-app is marked healthy
+    Retry test    Container is healthy
 
 Verify mattermost frontend title
     ${output} =    Execute Command    curl -s ${backend_url}
