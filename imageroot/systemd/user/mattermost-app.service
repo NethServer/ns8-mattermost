@@ -32,6 +32,9 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/mattermost-app.pid \
     --env MM_LOGSETTINGS_CONSOLEJSON=false \
     --env MM_LOGSETTINGS_ENABLEFILE=false \
     --env MM_SERVICESETTINGS_ENABLELOCALMODE=true \
+    --health-cmd='["/mattermost/bin/mmctl","system","status","--local"]' \
+    --health-timeout=10s \
+    --health-interval=30s \
     --image-volume=ignore \
     ${MATTERMOST_TEAM_EDITION_IMAGE}
 ExecStartPost=/bin/bash -c 'while ! podman healthcheck run mattermost-app ; do sleep 2 ; done ; exit 0'
