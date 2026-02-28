@@ -1,0 +1,67 @@
+{
+    "error": {
+        "403": "У вас нет прав на выполнение этой операции",
+        "cannot_retrieve_installed_modules": "Ошибка получения установленных модулей",
+        "401": "Неверная аутентификация",
+        "cannot_retrieve_module_info": "Не удалось получить информацию о модуле",
+        "generic_error": "Что-то пошло не так",
+        "error": "Ошибка",
+        "network_timeout": "Превышено время ожидания",
+        "404": "Ресурс не найден",
+        "network_error": "Сетевая ошибка",
+        "validation_error": "Ошибка проверки данных"
+    },
+    "common": {
+        "required": "Обязательное поле",
+        "work_in_progress": "Work in progress"
+    },
+    "status": {
+        "created": "Created",
+        "size": "Size",
+        "name": "Name",
+        "no_images": "No images",
+        "app_volumes": "App volume | App volumes",
+        "services": "Сервис | Сервисы",
+        "app_images": "App image | App images",
+        "failed_services": "{num} failed service | {num} failed services",
+        "mattermost_url": "Mattermost URL",
+        "open_mattermost_page": "Go to application",
+        "active_services": "{num} active service | {num} active services",
+        "no_services": "No services",
+        "inactive_services": "{num} inactive service | {num} inactive services",
+        "app_instance": "App instance",
+        "mount": "Mount",
+        "title": "Статус",
+        "installation_node": "Installation node",
+        "node": "Node",
+        "no_volumes": "No volumes"
+    },
+    "settings": {
+        "configuring": "Configuring...",
+        "disabled": "Disabled",
+        "instance_configuration": "Configure {instance}",
+        "http_to_https": "HTTP to HTTPS",
+        "lets_encrypt": "Let's Encrypt",
+        "host_format": "Требуется указать действительное полное доменное имя (FDQN)",
+        "email_format": "Invalid email address",
+        "mattermost_fqdn": "Mattermost FQDN",
+        "save": "Save",
+        "enabled": "Enabled",
+        "domain_already_used_in_traefik": "Этот домен уже используется в",
+        "host_pattern": "Требуется указать действительное полное доменное имя (FDQN)",
+        "title": "Settings"
+    },
+    "about": {
+        "title": "О сервисе"
+    },
+    "action": {
+        "get-module-info": "Получить информацию о модуле",
+        "get-status": "Получить статус",
+        "configure-module": "Настройка модуля",
+        "get-configuration": "Получить конфигурацию",
+        "get-name": "Запрос имени"
+    },
+    "task": {
+        "cannot_create_task": "Не удалось создать задачу {action}"
+    }
+}
