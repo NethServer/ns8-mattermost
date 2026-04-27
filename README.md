@@ -71,14 +71,9 @@ To uninstall the instance:
 
     remove-module --no-preserve mattermost1
 
-## Testing
+## Running tests locally
 
-Test the module using the `test-module.sh` script:
-
-
-    ./test-module.sh <NODE_ADDR> ghcr.io/nethserver/mattermost:latest
-
-The tests are made using [Robot Framework](https://robotframework.org/)
+This module uses the NS8 standard testing infrastructure. For instructions on how to run the test suite locally, refer to the [Running tests locally](https://github.com/NethServer/ns8-github-actions/blob/main/README.md#running-tests-locally) section of the ns8-github-actions repository.
 
 ## UI translation
 
