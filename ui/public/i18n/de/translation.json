@@ -47,7 +47,7 @@
         "401": "Authentifizierung fehlerhaft",
         "network_timeout": "Netzwerk-Zeitüberschreitung",
         "network_error": "Netzwerk-Fehler",
-        "403": "Vorgang nicht autorisiert",
+        "403": "Vorgang nicht zulässig",
         "404": "Ressource nicht gefunden",
         "generic_error": "Etwas ist schief gegangen",
         "validation_error": "Fehler bei der Validierung",
