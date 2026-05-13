@@ -1,5 +1,7 @@
 module.exports = {
   publicPath: "./",
+  // needed for newer axios versions
+  transpileDependencies: ["axios"],
   configureWebpack: {
     optimization: {
       splitChunks: {
