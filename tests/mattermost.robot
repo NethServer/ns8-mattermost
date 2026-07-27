@@ -1,6 +1,5 @@
 *** Settings ***
 Library    SSHLibrary
-Library    Browser
 Resource    api.resource
 
 *** Variables ***
@@ -47,6 +46,7 @@ Add module for ${SCENARIO} scenario
 
 Take screenshots
     [Tags]    ui
+    Import Library    Browser
     New Browser    chromium    headless=True
     New Context    ignoreHTTPSErrors=True
     Login to cluster-admin
