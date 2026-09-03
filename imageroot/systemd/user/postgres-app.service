@@ -5,17 +5,17 @@ Before=mattermost-app.service
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
-EnvironmentFile=%S/state/environment
-WorkingDirectory=%S/state
+EnvironmentFile=%E/state/environment
+WorkingDirectory=%E/state
 Restart=always
 TimeoutStopSec=70
-ExecStartPre=/bin/mkdir -p %S/state/restore/
+ExecStartPre=/bin/mkdir -p %E/state/restore/
 ExecStartPre=/bin/rm -f %t/postgres-app.pid %t/postgres-app.ctr-id
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/postgres-app.pid \
     --cidfile %t/postgres-app.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/mattermost.pod-id --replace -d --name  postgres-app \
     --volume postgres-data:/var/lib/postgresql/data:Z \
-    --volume %S/state/restore/:/docker-entrypoint-initdb.d/:Z \
+    --volume %E/state/restore/:/docker-entrypoint-initdb.d/:Z \
     --env POSTGRES_USER=mattuser \
     --env POSTGRES_PASSWORD=Nethesis,1234 \
     --env POSTGRES_DB=mattermost \
