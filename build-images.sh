@@ -20,7 +20,7 @@ corepack_version=0.36.0
 # Reuse existing nodebuilder-mattermost container, to speed up builds
 if ! buildah containers --format "{{.ContainerName}}" | grep -q nodebuilder-mattermost; then
     echo "Pulling NodeJS runtime..."
-    buildah from --name nodebuilder-mattermost -v "${PWD}:/usr/src:Z" docker.io/node:24.22.2-alpine
+    buildah from --name nodebuilder-mattermost -v "${PWD}:/usr/src:Z" docker.io/node:26.13.0-alpine
     buildah run nodebuilder-mattermost sh -c "npm install -g corepack@${corepack_version} && corepack enable"
 fi
 
