@@ -11,7 +11,7 @@ You could configure the settings by  [Environment variables](https://docs.matter
 
 ## Upgrade to Mattermost v11
 
-The module follows the Mattermost ESR releases. Version 10.11 ESR reached end of support on August 15, 2026. The module now ships 11.7 ESR.
+The module follows the Mattermost ESR releases. The module now ships 11.7 ESR.
 
 Read the [upgrade notes](https://docs.mattermost.com/administration-guide/upgrade/important-upgrade-notes) before upgrading. These Team Edition changes cannot be worked around:
 
