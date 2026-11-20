@@ -22,6 +22,8 @@ Read the [upgrade notes](https://docs.mattermost.com/administration-guide/upgrad
 
 Bleve search was removed in v11. The module no longer mounts the `mattermost-bleve-indexes` volume and forces database search. The update removes the old volume.
 
+The bundled Agents (AI) plugin moves from v1 to v2. If you configured an AI provider in v1, follow the Agents upgrade guide linked from the v11.7 section of the upgrade notes.
+
 ## Install
 
 Instantiate the module with:
