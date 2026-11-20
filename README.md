@@ -17,7 +17,7 @@ Read the [upgrade notes](https://docs.mattermost.com/administration-guide/upgrad
 
 - Team Edition is limited to 250 activated users, down from 1000.
 - GitLab SSO is no longer available.
-- Playbooks no longer works.
+- The Playbooks plugin no longer works.
 - Passwords are re-hashed with PBKDF2 at login. A rollback to 10.x locks out users who logged in on v11, so take a backup first.
 
 Bleve search was removed in v11. The module no longer mounts the `mattermost-bleve-indexes` volume and forces database search. The old volume stays on disk and can be removed by hand.
