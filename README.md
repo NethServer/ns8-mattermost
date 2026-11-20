@@ -20,7 +20,13 @@ Read the [upgrade notes](https://docs.mattermost.com/administration-guide/upgrad
 - The Playbooks plugin no longer works.
 - Passwords are re-hashed with PBKDF2 at login. A rollback to 10.x locks out users who logged in on v11, so take a backup first.
 
-Bleve search was removed in v11. The module no longer mounts the `mattermost-bleve-indexes` volume and forces database search. The update removes the old volume.
+Mattermost v11 refuses to start if some old settings keep a value it no longer supports. The module forces these settings with environment variables, so the System Console shows them as locked:
+
+- `TeamSettings.ExperimentalViewArchivedChannels=true`. The setting is deprecated and archived channels are always visible to their members. A site that hid archived channels sees them again. To hide an archived channel, make it private and remove its members.
+- `ExperimentalSettings.ClientSideCertEnable=false`. Certificate-based login was removed.
+- `SqlSettings.DisableDatabaseSearch=false`. This is already the default. Bleve search was removed and Team Edition has no other search engine, so search works only from the database.
+
+The module no longer mounts the `mattermost-bleve-indexes` volume. The update removes the old volume.
 
 The bundled Agents (AI) plugin moves from v1 to v2. If you configured an AI provider in v1, follow the Agents upgrade guide linked from the v11.7 section of the upgrade notes.
 

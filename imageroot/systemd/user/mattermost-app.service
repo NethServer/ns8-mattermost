@@ -11,6 +11,9 @@ WorkingDirectory=%E/state
 Restart=always
 TimeoutStopSec=90
 ExecStartPre=/bin/rm -f %t/mattermost-app.pid %t/mattermost-app.ctr-id
+# Mattermost 11 refuses to start with ExperimentalViewArchivedChannels=false or ClientSideCertEnable=true,
+# and has no search without DisableDatabaseSearch=false, so these values are forced. See the v11.0 entry in
+# https://docs.mattermost.com/administration-guide/upgrade/important-upgrade-notes.html
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/mattermost-app.pid \
     --cidfile %t/mattermost-app.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/mattermost.pod-id --replace -d --name  mattermost-app \
