@@ -12,7 +12,7 @@ import sys
 import agent
 
 counter_script="""
-podman exec mattermost-app mmctl --local --json user list | \
+podman exec mattermost-app mmctl --local --json user list --all | \
     jq -c '[length, map(select(.is_bot == true | not)) | length]'
 """
 
