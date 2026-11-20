@@ -1,5 +1,7 @@
 *** Settings ***
 Resource    mattermost.resource
+# Runs even when a test fails, so no scheduled backup is left on a reused node.
+Suite Teardown    Remove the test backup
 
 *** Test Cases ***
 Restore mattermost in place
@@ -31,9 +33,3 @@ Mattermost runs again after the restore
 Test data is restored
     [Setup]    The restore has run
     Test data is present
-
-Remove the test backup
-    Run task    cluster/remove-backup    {"id":${backup_id}}
-    IF    ${repository_created}
-        Run task    cluster/remove-backup-repository    {"id":"${repository}"}
-    END

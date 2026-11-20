@@ -91,3 +91,13 @@ Login to cluster-admin
     Fill Text    text="Password"    ${ADMIN_PASSWORD}
     Click    button >> text="Log in"
     Wait For Elements State    css=#main-content    visible    timeout=10s
+
+Remove the test backup
+    ${bid} =    Get Variable Value    ${backup_id}
+    IF    $bid is not None
+        Run task    cluster/remove-backup    {"id":${bid}}
+    END
+    ${created} =    Get Variable Value    ${repository_created}    ${FALSE}
+    IF    ${created}
+        Run task    cluster/remove-backup-repository    {"id":"${repository}"}
+    END
