@@ -11,6 +11,9 @@ WorkingDirectory=%E/state
 Restart=always
 TimeoutStopSec=90
 ExecStartPre=/bin/rm -f %t/mattermost-app.pid %t/mattermost-app.ctr-id
+# Mattermost 11 refuses to start with ExperimentalViewArchivedChannels=false or ClientSideCertEnable=true,
+# and has no search without DisableDatabaseSearch=false, so these values are forced. See the v11.0 entry in
+# https://docs.mattermost.com/administration-guide/upgrade/important-upgrade-notes.html
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/mattermost-app.pid \
     --cidfile %t/mattermost-app.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/mattermost.pod-id --replace -d --name  mattermost-app \
@@ -18,7 +21,6 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/mattermost-app.pid \
     --volume mattermost-data:/mattermost/data:Z \
     --volume mattermost-plugins:/mattermost/plugins:Z \
     --volume mattermost-plugins-client:/mattermost/client/plugins:Z \
-    --volume mattermost-bleve-indexes:/mattermost/bleve-indexes:Z \
     --env MM_SQLSETTINGS_DRIVERNAME=postgres \
     --env MM_SQLSETTINGS_DATASOURCE=postgres://mattuser:Nethesis,1234@127.0.0.1:5432/mattermost?sslmode=disable&connect_timeout=10 \
     --env TZ=UTC \
@@ -32,6 +34,9 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/mattermost-app.pid \
     --env MM_LOGSETTINGS_CONSOLEJSON=false \
     --env MM_LOGSETTINGS_ENABLEFILE=false \
     --env MM_SERVICESETTINGS_ENABLELOCALMODE=true \
+    --env MM_TEAMSETTINGS_EXPERIMENTALVIEWARCHIVEDCHANNELS=true \
+    --env MM_EXPERIMENTALSETTINGS_CLIENTSIDECERTENABLE=false \
+    --env MM_SQLSETTINGS_DISABLEDATABASESEARCH=false \
     --health-cmd='["/mattermost/bin/mmctl","system","status","--local"]' \
     --health-timeout=10s \
     --health-interval=30s \

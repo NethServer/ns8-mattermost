@@ -1,5 +1,6 @@
 {
   "name": "Mattermost",
+  "upstream_name": "Mattermost 11.7 ESR Free Edition",
   "description": {
     "en": "Mattermost is a secure Open Source chat for team collaboration.",
     "it": "Mattermost è una chat Open Source sicura per la collaborazione in team."

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#
+# Copyright (C) 2026 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+# Mattermost 11 removed Bleve search. No -f: never remove a volume a container still uses.
+if podman volume exists mattermost-bleve-indexes; then
+    podman volume rm mattermost-bleve-indexes || echo "Cannot remove the mattermost-bleve-indexes volume" 1>&2
+fi

@@ -33,12 +33,12 @@ buildah add "${container}" ui/dist /ui
 # Setup the entrypoint, ask to reserve one TCP port with the label and set a rootless container
 buildah config --entrypoint=/ \
     --label="org.nethserver.authorizations=node:fwadm traefik@node:routeadm" \
-    --label="org.nethserver.min-from=2.2.0" \
+    --label="org.nethserver.min-from=2.4.0" \
     --label="org.nethserver.tcp-ports-demand=2" \
     --label="org.nethserver.udp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
     --label="org.nethserver.min-core=3.20.1" \
-    --label="org.nethserver.images=docker.io/postgres:17.11-alpine docker.io/mattermost/mattermost-team-edition:10.11.26" \
+    --label="org.nethserver.images=docker.io/postgres:17.11-alpine docker.io/mattermost/mattermost-team-edition:11.7.15" \
     "${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
