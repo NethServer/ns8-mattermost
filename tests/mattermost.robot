@@ -60,9 +60,9 @@ Log in as
     RETURN    ${token}
 
 Post as
-    [Arguments]    ${username}    ${message}    ${root_id}=${EMPTY}
+    [Arguments]    ${username}    ${message}    ${root_id}=${EMPTY}    ${file_ids}=[]
     ${token} =    Log in as    ${username}
-    ${id} =    Api    ${token}    POST    /posts    {"channel_id":"${channel_id}","message":"${message}","root_id":"${root_id}"}    .id
+    ${id} =    Api    ${token}    POST    /posts    {"channel_id":"${channel_id}","message":"${message}","root_id":"${root_id}","file_ids":${file_ids}}    .id
     RETURN    ${id}
 
 Test data is present
@@ -70,13 +70,14 @@ Test data is present
     ${team_id} =    Api    ${token}    GET    /teams/name/robot-team    jq=.id
     ${cid} =    Api    ${token}    GET    /teams/${team_id}/channels/name/robot-channel    jq=.id
     ${count} =    Api    ${token}    GET    /channels/${cid}/posts    jq=[.posts[] | select(.type == "")] | length
-    Should Be Equal As Integers    ${count}    3    the conversation must hold 3 messages
+    Should Be Equal As Integers    ${count}    4    the conversation must hold 4 messages
     # Bleve is gone in v11: this goes through the database search.
     ${found} =    Api    ${token}    POST    /teams/${team_id}/posts/search    {"terms":"${search_word}"}    .order | length
     Should Be Equal As Integers    ${found}    1    the search must find the message
     ${facts} =    Run task    module/${module_id}/get-facts    {}
     Should Be Equal As Integers    ${facts}[active_users]    2
-    ${out} =    Execute Command    runagent -m ${module_id} podman exec mattermost-app cat /mattermost/data/robot-marker
+    # The attachment lives on the data volume, not in the database.
+    ${out} =    Execute Command    curl -sf -H 'Authorization: Bearer ${token}' ${backend_url.rstrip('/')}/api/v4/files/${file_id}
     Should Be Equal    ${out}    ${marker}
 
 The restore has run
@@ -146,8 +147,13 @@ Create test data
     ${root} =    Post as    alice    Hello Bob, the meeting moved to the ${search_word} room
     Post as    bob    Thanks Alice, I will be there    ${root}
     Post as    alice    Great, see you at ten
-    Execute Command    runagent -m ${module_id} podman exec mattermost-app sh -c 'echo ${stamp} > /mattermost/data/robot-marker'
+    ${fid}    ${rc} =    Execute Command
+    ...    printf '%s' '${stamp}' | curl -sf -H 'Authorization: Bearer ${token}' -F channel_id=${channel_id} -F 'files=@-;filename=agenda.txt' ${backend_url.rstrip('/')}/api/v4/files | jq -r '.file_infos[0].id'
+    ...    return_rc=True
+    Should Be Equal As Integers    ${rc}    0    the file upload failed
+    Set Suite Variable    ${file_id}    ${fid}
     Set Suite Variable    ${marker}    ${stamp}
+    Post as    alice    Here is the agenda    file_ids=["${file_id}"]
     # Worst case from the v11 upgrade notes: the 10.11 server accepts it, 11.7 refuses to start with it.
     IF    r'${SCENARIO}' == 'update'
         Mmctl    config set TeamSettings.ExperimentalViewArchivedChannels false
