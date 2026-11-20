@@ -4,8 +4,8 @@
   "packageRules": [
     {
       "matchPackageNames": ["mattermost/mattermost-team-edition"],
-      "allowedVersions": "10.11.*",
-      "groupName": "ESR 10.11.x updates",
+      "allowedVersions": "11.7.*",
+      "groupName": "ESR 11.7.x updates",
       "automerge": true
     },
     {

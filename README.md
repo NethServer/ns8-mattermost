@@ -9,6 +9,19 @@ The documenation is available at https://docs.mattermost.com/
 
 You could configure the settings by  [Environment variables](https://docs.mattermost.com/configure/environment-configuration-settings.html), the container must be restarted once the Env vars has been changed
 
+## Upgrade to Mattermost v11
+
+The module follows the Mattermost ESR releases. Version 10.11 ESR reached end of support on August 15, 2026. The module now ships 11.7 ESR.
+
+Read the [upgrade notes](https://docs.mattermost.com/administration-guide/upgrade/important-upgrade-notes) before upgrading. These Team Edition changes cannot be worked around:
+
+- Team Edition is limited to 250 activated users, down from 1000.
+- GitLab SSO is no longer available.
+- Playbooks no longer works.
+- Passwords are re-hashed with PBKDF2 at login. A rollback to 10.x locks out users who logged in on v11, so take a backup first.
+
+Bleve search was removed in v11. The module no longer mounts the `mattermost-bleve-indexes` volume and forces database search. The old volume stays on disk and can be removed by hand.
+
 ## Install
 
 Instantiate the module with:
